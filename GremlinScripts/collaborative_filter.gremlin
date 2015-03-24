@@ -1,0 +1,7 @@
+def getRecommendation(def identity)
+{
+	list=[];
+	g.V.has("identity",identity).as('x').out.in.except('x').aggregate(list);
+	c=list.size();
+	
+}
