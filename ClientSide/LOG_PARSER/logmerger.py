@@ -1,11 +1,12 @@
 #analyze log files
 #merge them into single file
-#add file to send_folder
-#ping server--if +ve zip and send send_folder else 
+#add file to unfinished (the changed folder name)
+#ping server--if +ve zip and send send_folder else
 #delete all ulog files
 #rewrite version to 1
 #restart cron_job
 import csv
+import subprocess
 
 for i in range(1,2):
 	log_file=open("/home/nitin/Desktop/MINOR_PROJECT/LOG_PARSER/logs/ulog"+str(i)+".csv","r")
@@ -15,7 +16,5 @@ for i in range(1,2):
 		print program_name.split('/')[-1]
 #user,pid,cpu,mem,vsz,rss,tty,stat,start,time,program
 
-
-
-
-
+#Uncomment to check
+#subprocess.call(["mv", "FileNameHere", "unfinished/FileNameHere"])
