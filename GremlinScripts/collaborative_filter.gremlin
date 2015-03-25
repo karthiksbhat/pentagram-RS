@@ -1,7 +1,21 @@
 def getRecommendation(def identity)
 {
 	list=[];
-	g.V.has("identity",identity).as('x').out.in.except('x').aggregate(list);
-	c=list.size();
+	g.V.has("identity",identity).as('x').out.in.except('x').id.aggregate(list);
+	list=list.unique{ a, b -> a <=> b };
+	list_i=[];
+	list_j=[];
+	for(def i=0;i<list.size();i++)
+	{
+		list_i.clear();
+		g.v(list[i]).out.id.aggregate(list_i);
+		for(def j=i+1;j<list.size();j++)
+		{	
+		    list_j.clear();
+			g.v(list[j]).out.id.aggregate(list_j);
+			println list_j;
+			println list_i;
+		}
+	}
 	
 }
