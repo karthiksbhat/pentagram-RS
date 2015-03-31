@@ -1,0 +1,17 @@
+def add_edges(def identity)
+{
+	userno=g.V.has("identity",identity).next().id;
+	new File("/home/nitin/Desktop/MINOR_PROJECT/neo4j-community-2.1.7/files/"+identity+"_apps.txt").eachLine { line ->
+    	k=g.V("appname",line).toList().size();
+    	if(k==0)
+    	{
+    		g.addVertex([appname:line,genre:"none"]);
+    		g.v(userno).addEdge("uses",g.V.has("appname",line).next()).sideEffect{it.weight=1};
+    	}
+    	else{
+    		vno=g.V.has("appname",line).next().id;
+    		g.v(vno)_().filter{it.in("uses").has("identity",identity).count() == 0}.each{g.addEdge(g.v(userno), it, "uses")};
+		}	
+	}
+
+}

@@ -1,0 +1,8 @@
+def add_vertex(def identity_sent)
+{
+	k=g.V("identity",identity_sent).toList().size();
+	if(k==0)
+	{
+		g.addVertex([identity:identity_sent,weight:0]);
+	}
+}

@@ -1,0 +1,8 @@
+def show_vertices()
+{
+	g.V.map;
+}
+def show_edges()
+{
+	g.E.map;
+}
