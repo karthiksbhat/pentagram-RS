@@ -51,12 +51,3 @@ current_version = current_version+1
 e.seek(0)
 e.write(str(current_version))
 e.close()
-
-
-
- 
-
-
-
-
-    

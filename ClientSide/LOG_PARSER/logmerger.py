@@ -17,4 +17,4 @@ for i in range(1,2):
 #user,pid,cpu,mem,vsz,rss,tty,stat,start,time,program
 
 #Uncomment to check
-#subprocess.call(["mv", "FileNameHere", "unfinished/FileNameHere"])
+subprocess.call(["mv", "FileNameHere", "../../client/unfinished/FileNameHere"])
