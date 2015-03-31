@@ -9,3 +9,5 @@ url = 'http://httpbin.org/post' #IP address of the server
 fileobj = open('unfinished/mergedLog1.tar.gz', 'rb')
 r = requests.post(url, files={"archive": ("mergedLog1.tar.gz", fileobj)})
 print r.text
+
+#ACTION = get_reco, register, pushing_logs
