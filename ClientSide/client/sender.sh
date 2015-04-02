@@ -15,7 +15,7 @@ then
   #cd ..
   #python pusher.py
   curl --form "fileupload=@mergedLog1.tar.gz" --form identity=$ID --form action=pushing_logs 10.42.0.88:6666
-  cd unfinished
-  rm *
-  cd ..
+  #cd unfinished
+  #rm *
+  #cd ..
 fi

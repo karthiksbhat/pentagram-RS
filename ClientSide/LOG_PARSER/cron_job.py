@@ -2,7 +2,7 @@ from crontab import CronTab
 import sys
 
 #task in cron
-cmd = 'python /home/nitin/Desktop/MINOR_PROJECT/LOG_PARSER/parser.py'
+cmd = 'python ../LOG_PARSER/parser.py'
 
 def start_logging():
 	tab = CronTab()
