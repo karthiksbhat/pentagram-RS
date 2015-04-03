@@ -21,16 +21,39 @@ def register():
 		print r.text
 		print r.url
 		master.quit()
-		subprocess.call(["python", "guiLoaderDiff.py"])
+		generalCall()
  
 def start():
-	subprocess.call(["python", "../LOG_PASRER/cron_job.py", "start"])
+	print "In start"
+	pathToCron=os.path.abspath("../LOG_PARSER/cron_job.py")
+	#print pathToCron
+	#type(pathToCron)
+	subprocess.Popen(['python', pathToCron, "start"])
+	#subprocess.call(["cd", str(current)+"/../LOG_PASRER/"])
+	#print current
+	#subprocess.call(["python", "tester.py", "start"])
 
 def stop():
-	subprocess.call(["python", "../LOG_PASRER/cron_job.py", "stop"])
+	print "In stop"
+	pathToCron=os.path.abspath("../LOG_PARSER/cron_job.py")
+	subprocess.Popen(['python', pathToCron, "stop"])
+	#subprocess.call(["python", "../LOG_PASRER/cron_job.py", "stop"])
 
 def getReco():
-	subprocess.call(["python", "getReco.py"])
+	print "get reco"
+	#subprocess.call(["python", "getReco.py"])
+
+def generalCall():
+	master = Tk()
+	Label(master, text="Pentagram-RS").grid(row=0, column=1, columnspan=2)
+	Label(master, text="Hi. The most suitable recommendation for you will appear in the textbox below, when you ask for recommendations.").grid(row=2, column=0, columnspan=4)
+	Button(master, text='Start RS', command=start).grid(row=0, column=0, sticky=E, pady=4)
+	Button(master, text='Stop RS', command=stop).grid(row=0, column=3, sticky=W, pady=4)
+	Button(master, text='Quit', command=master.quit).grid(row=0, column=4, sticky=E, pady=4)
+	recoArea = Entry(master)
+	recoArea.grid(row=3, column=0, columnspan=4, sticky=EW)
+	Button(master, text='Get Recommendation', command=getReco).grid(row=4, column=2, sticky=W, pady=4)
+	mainloop()
 
 if not os.path.isfile("identityFile.txt"):
 	master = Tk()
@@ -55,18 +78,7 @@ if not os.path.isfile("identityFile.txt"):
 	mainloop()
 
 else:
-	master = Tk()
-	Label(master, text="Pentagram-RS").grid(row=0, column=1, columnspan=2)
-	Label(master, text="Hi. The most suitable recommendation for you will appear in the textbox below, when you ask for recommendations.").grid(row=2, column=0, columnspan=4)
-	Button(master, text='Start RS', command=start).grid(row=0, column=0, sticky=E, pady=4)
-	Button(master, text='Stop RS', command=stop).grid(row=0, column=3, sticky=W, pady=4)
-	Button(master, text='Quit', command=master.quit).grid(row=0, column=4, sticky=E, pady=4)
-	recoArea = Entry(master)
-	recoArea.grid(row=3, column=0, columnspan=4, sticky=EW)
-	Button(master, text='Get Recommendation', command=getReco).grid(row=4, column=2, sticky=W, pady=4)
-	mainloop()
-
-
+	generalCall()
 
 
 
