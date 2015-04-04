@@ -9,26 +9,49 @@ import csv
 import os.path
 import subprocess
 
-allowedApps = ['VLC', 'LimeChat']#For Whitelisting
+allowedApps = ['vlc', 'limechat','bash','chrome','sublime','bettertouchtool','eclipse','netbeans','rhythmbox','xchat']#For Whitelisting
 
 
 path=os.path.abspath('')
 versionfile=open("versionfile.txt", "r")#This file will hold the version number of logs to be pushed
-version=int(versionfile.read()[:-1])
+version=int(versionfile.read())
 mergedLog=open(path+"/unfinished/mergedLogs"+str(version)+".csv", "w")
 print version
 for i in xrange(1,3):
+	# print "here"
 	readfile=open(path+"/logs/ulog"+str(i)+".csv","r")
 	for line in readfile:
-		mergedLog.write(line)
+		# print line
+		if "PID,CPU" in line:
+			continue
+		else:
+			print "here"
+			values=line.split(",")
+			value=[]
+			# print values
+			for app in allowedApps:
+				tempVal=values[10:]
+				# print tempVal
+				for tempApp in tempVal:
+					tempApp=tempApp.lower()
+					if app in tempApp:
+						value=values[:9]
+						value.append(app)
+						print value
+						break
+				if len(value) > 0:
+					lineNew=",".join(value)
+					print lineNew
+					mergedLog.write(lineNew)
 
 versionfile.close()
-versionWrite=open("versionfile.txt", "w")
-version+=1
-versionWrite.write(version)
+# versionWrite=open("versionfile.txt", "w")
+# version+=1
+# versionWrite.write(str(version))
+# versionWrite.close()
 
 #subprocess.Popen(["cd", "../client/"])
-subprocess.Popen(["sh", "sender.sh"])
-pathToCron=os.path.abspath("./cron_job.py")
-print pathToCron
-subprocess.Popen(["python", pathToCron, "start"])
+# subprocess.Popen(["sh", "sender.sh"])
+# pathToCron=os.path.abspath("cron_job.py")
+# print pathToCron
+# subprocess.Popen(["python", pathToCron, "start"])
