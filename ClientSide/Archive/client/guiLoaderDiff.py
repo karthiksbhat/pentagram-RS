@@ -26,8 +26,6 @@ def register():
 def start():
 	print "In start"
 	pathToCron=os.path.abspath("../LOG_PARSER/cron_job.py")
-	#print pathToCron
-	#type(pathToCron)
 	subprocess.Popen(['python', pathToCron, "start"])
 	#subprocess.call(["cd", str(current)+"/../LOG_PASRER/"])
 	#print current
@@ -41,7 +39,8 @@ def stop():
 
 def getReco():
 	print "get reco"
-	#subprocess.call(["python", "getReco.py"])
+	#pathToReco=os.path.abspath("../LOG_PARSER/cron_job.py")
+	subprocess.Popen(["python", "getReco.py"])
 
 def generalCall():
 	master = Tk()
