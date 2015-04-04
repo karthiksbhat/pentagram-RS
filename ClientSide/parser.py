@@ -5,6 +5,7 @@ import re
 import csv
 import sys
 
+
 with tempfile.TemporaryFile() as tempf:
     proc = subprocess.Popen(['ps','aux'], stdout=tempf)
     proc.wait()
@@ -17,12 +18,19 @@ for number in range(len(lines)):
     	
 path=os.path.abspath(".")
 print path
+
+'''
+temp = open(path+"/temp.txt","w")
+temp.write("got called")
+temp.close()
+'''
+
 e=open(path+"/logs/VERSION","r+")
 current_version = int(e.readline())
 f=open(path+"/logs/log"+str((current_version/3)+1)+".csv","a")
 if(current_version%3==0 and current_version!=0):
-    os.system("sort -u "+path+"/logs/log"+str(current_version/3)+".csv" + " > " + path+"/ulog"+str(current_version/3)+".csv")
-    os.system("echo 'USER,PID,CPU,MEM,VSZ,RSS,TTY,STAT,START,TIME,PROGRAM' | cat - "+path+"/logs/ulog"+str(current_version/3)+".csv"+" > temp && mv temp "+path+"/logs/ulog"+str(current_version/3)+".csv")
+    os.system("sort -u "+path+"/logs/log"+str(current_version/3)+".csv" + " > " + path+"/logs/ulog"+str(current_version/3)+".csv")
+    os.system("echo 'USER,PID,CPU,MEM,VSZ,RSS,TTY,STAT,START,TIME,PROGRAM' | cat - "+path+"/logs/ulog"+str(current_version/3)+".csv"+" > "+path+"/logs/temp && mv "+path+"/logs/temp "+path+"/logs/ulog"+str(current_version/3)+".csv")
     #after every time chunk remove redundant lines in the log files
     os.system("rm "+path+"/logs/log"+str(current_version/3)+".csv")
 writer=csv.writer(f)

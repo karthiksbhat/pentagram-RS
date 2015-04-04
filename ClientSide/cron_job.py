@@ -1,11 +1,14 @@
 from crontab import CronTab
 import sys
+import os
 
 #task in cron
-cmd = 'sudo python ../LOG_PARSER/parser.py'
+
+pwd = os.path.abspath('.') 
+cmd = 'cd '+pwd+' ; python '+pwd+'/parser.py'
 
 def start_logging():
-	tab = CronTab(user="Karthik")
+	tab = CronTab()
 	cron_job = tab.new(cmd)
 	cron_job.minute.every(1) # change this value to the decided threshold in production phase
 
