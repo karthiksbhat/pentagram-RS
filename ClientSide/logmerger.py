@@ -14,13 +14,18 @@ allowedApps = ['VLC', 'LimeChat']#For Whitelisting
 
 path=os.path.abspath('')
 versionfile=open("versionfile.txt", "r")#This file will hold the version number of logs to be pushed
-version=versionfile.read()[:-1]
+version=int(versionfile.read()[:-1])
 mergedLog=open(path+"/unfinished/mergedLogs"+str(version)+".csv", "w")
 print version
 for i in xrange(1,3):
 	readfile=open(path+"/logs/ulog"+str(i)+".csv","r")
 	for line in readfile:
 		mergedLog.write(line)
+
+versionfile.close()
+versionWrite=open("versionfile.txt", "w")
+version+=1
+versionWrite.write(version)
 
 #subprocess.Popen(["cd", "../client/"])
 subprocess.Popen(["sh", "sender.sh"])

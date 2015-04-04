@@ -34,13 +34,14 @@ def start():
 def stop():
 	print "In stop"
 	pathToCron=os.path.abspath("cron_job.py")
+	print pathToCron
 	subprocess.Popen(['python', pathToCron, "stop"])
 	#subprocess.call(["python", "../LOG_PASRER/cron_job.py", "stop"])
 
 def getReco():
 	print "get reco"
-	#pathToReco=os.path.abspath("../LOG_PARSER/cron_job.py")
-	subprocess.Popen(["python", "getReco.py"])
+	pathToReco=os.path.abspath("getReco.py")
+	subprocess.Popen(["python", pathToReco])
 
 def generalCall():
 	master = Tk()
@@ -72,8 +73,8 @@ if not os.path.isfile("identityFile.txt"):
 	age.grid(row=3, column=1)
 	email.grid(row=4, column=1)
 
-	Button(master, text='Quit', command=master.quit).grid(row=5, column=1, sticky=E, pady=4)
-	Button(master, text='Register', command=register).grid(row=5, column=1, sticky=W, pady=4)
+	Button(master, text='Quit', command=master.quit).grid(row=5, column=1, sticky=W, pady=4)
+	Button(master, text='Register', command=register).grid(row=5, column=1, sticky=E, pady=4)
 	mainloop()
 
 else:
