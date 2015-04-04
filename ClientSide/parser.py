@@ -17,7 +17,7 @@ for number in range(len(lines)):
     lines[number]=re.sub(' +',',',lines[number])
     	
 path=os.path.abspath(".")
-print path
+print "Working Path :" + path
 
 '''
 temp = open(path+"/temp.txt","w")
@@ -50,9 +50,12 @@ for line in lines:
     			array.append(word)
     		writer.writerow(array)
     	
-if (current_version==23):
+if (current_version==3):
     os.system('python cron_job.py stop')
-    os.system('python logmerger.py')                   
+    os.system('python logmerger.py')   
+    current_version = -1
+    os.system('python cron_job.py start')
+    print "cronjob restarted"                
                 
 f.close()
 current_version = current_version+1

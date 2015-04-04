@@ -5,7 +5,7 @@ import os
 #task in cron
 
 pwd = os.path.abspath('.') 
-cmd = 'cd '+pwd+' ; python '+pwd+'/parser.py'
+cmd = 'cd '+pwd+' ; python '+pwd+'/parser.py >> '+pwd+'/cron_log/crontab_log.txt'
 
 def start_logging():
 	tab = CronTab()

@@ -6,18 +6,18 @@
 #rewrite version to 1
 #restart cron_job
 import csv
-import os.path
+import os
 import subprocess
 
 allowedApps = ['VLC', 'LimeChat']#For Whitelisting
 
 
-path=os.path.abspath('')
+path=os.path.abspath('.')
 versionfile=open("versionfile.txt", "r")#This file will hold the version number of logs to be pushed
-version=int(versionfile.read()[:-1])
+version=int(versionfile.read())
 mergedLog=open(path+"/unfinished/mergedLogs"+str(version)+".csv", "w")
-print version
-for i in xrange(1,3):
+print "VersionFile.txt:" + str(version)
+for i in xrange(1,2):
 	readfile=open(path+"/logs/ulog"+str(i)+".csv","r")
 	for line in readfile:
 		mergedLog.write(line)
@@ -25,10 +25,11 @@ for i in xrange(1,3):
 versionfile.close()
 versionWrite=open("versionfile.txt", "w")
 version+=1
-versionWrite.write(version)
+versionWrite.write(str(version))
+versionWrite.close()
 
+print "VersionFile updated"
 #subprocess.Popen(["cd", "../client/"])
-subprocess.Popen(["sh", "sender.sh"])
-pathToCron=os.path.abspath("./cron_job.py")
-print pathToCron
-subprocess.Popen(["python", pathToCron, "start"])
+os.system('sh sender.sh')
+# pathToCron=os.path.abspath("cron_job.py")
+# print pathToCron
