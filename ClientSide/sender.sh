@@ -18,4 +18,6 @@ then
   #cd unfinished
   #rm *
   #cd ..
+else
+  echo "Server not reachable\n" > server_status
 fi

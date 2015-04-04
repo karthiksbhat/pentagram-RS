@@ -1,0 +1,10 @@
+Working Path :/home/karthik/Documents/3rd_Year_Course_Projects/6th_Sem/minor_project/pentagram-RS/ClientSide
+Working Path :/home/karthik/Documents/3rd_Year_Course_Projects/6th_Sem/minor_project/pentagram-RS/ClientSide
+Working Path :/home/karthik/Documents/3rd_Year_Course_Projects/6th_Sem/minor_project/pentagram-RS/ClientSide
+VersionFile.txt:0
+VersionFile updated
+* * * * * cd /home/karthik/Documents/3rd_Year_Course_Projects/6th_Sem/minor_project/pentagram-RS/ClientSide ; python /home/karthik/Documents/3rd_Year_Course_Projects/6th_Sem/minor_project/pentagram-RS/ClientSide/parser.py >> /home/karthik/Documents/3rd_Year_Course_Projects/6th_Sem/minor_project/pentagram-RS/ClientSide/cron_log/crontab_log.txt
+
+Working Path :/home/karthik/Documents/3rd_Year_Course_Projects/6th_Sem/minor_project/pentagram-RS/ClientSide
+cronjob restarted
+Working Path :/home/karthik/Documents/3rd_Year_Course_Projects/6th_Sem/minor_project/pentagram-RS/ClientSide
