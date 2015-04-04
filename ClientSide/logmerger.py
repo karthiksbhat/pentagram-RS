@@ -9,7 +9,7 @@ import csv
 import os
 import subprocess
 
-allowedApps = ['VLC', 'LimeChat']#For Whitelisting
+allowedApps = ['vlc','limechat','bash','chrome','sublime','bettertouchtool','eclipse','netbeans','rhythmbox','xchat']#For Whitelisting
 
 
 path=os.path.abspath('.')
@@ -20,7 +20,28 @@ print "VersionFile.txt:" + str(version)
 for i in xrange(1,2):
 	readfile=open(path+"/logs/ulog"+str(i)+".csv","r")
 	for line in readfile:
-		mergedLog.write(line)
+		# print line
+		if "PID,CPU" in line:
+			continue
+		else:
+			# print "here"
+			values=line.split(",")
+			value=[]
+			# print values
+			for app in allowedApps:
+				tempVal=values[10:]
+				# print tempVal
+				for tempApp in tempVal:
+					tempApp=tempApp.lower()
+					if app in tempApp:
+						value=values[:9]
+						value.append(app)
+						# print value
+						break
+				if len(value) > 0:
+					lineNew=",".join(value)
+					print lineNew
+					mergedLog.write(lineNew)
 
 versionfile.close()
 versionWrite=open("versionfile.txt", "w")
