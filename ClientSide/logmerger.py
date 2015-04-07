@@ -9,7 +9,7 @@ import csv
 import os
 import subprocess
 
-allowedApps = ['vlc','limechat','bash','chrome','sublime','bettertouchtool','eclipse','netbeans','rhythmbox','xchat']#For Whitelisting
+allowedApps = ['vlc','limechat','bash','chrome','sublime','bettertouchtool','eclipse','netbeans','rhythmbox','xchat','libreoffice','chromium','evince','codeblocks','geany']#For Whitelisting
 
 
 path=os.path.abspath('.')

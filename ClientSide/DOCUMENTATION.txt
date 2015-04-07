@@ -1,13 +1,18 @@
 Project Title : A Recommendation System for users based on their daily computer applications' activities
 				(tracked by user logs from the system)
 
-Stages in the project/tool :
+Stages in the project :
 
 Stage 1 :
 -------- 
 Build a user level application. An application that can be installed on a user machine which then 
 corresponds with the central machine (recommender system server)
 Architecture of application : Client-Server based approach
+
+Technologies used :
+	1. Tkinter - Python based graphics library for GUI rendering
+	2. python-crontab - A python wrapping to create cron jobs and monitor crontab
+	3. cURL - A tool used to transfer data from or to a server using HTTP protocol
 
 
 Stage 2 :
@@ -16,6 +21,14 @@ Decide on a common data representation for the logs from different users. Decide
 some threshold parameters to determine how much data is sent from each machine at a time, when, etc.
 The application developed in Stage 1 must comply with these decided parameters and the format of data.
 
+Technologies used :
+	1. ps(Unix Command) : A UNIX command(short for process status) which displays current running processes in the OS
+	2. CSV file format : Comma-seperated-values file format to represent the user logs
+
+Parameters used and threshold values decided :
+	1. Controlled variable time parameter : The user logs are merged and sent to server every 8 minutes
+	2. Number of recommended applications threshold
+	
 
 Stage 3 :
 -------- 
@@ -38,7 +51,7 @@ Completed Work Progress:
 Stage 4 :
 -------- 
 Small scale deployment and testing the results. This will of course involve some training of the 
-recommender system to develop some base data (machine learning)
+recommender system to develop some base data.
 
 
 
