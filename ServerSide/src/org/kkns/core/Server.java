@@ -51,17 +51,17 @@ public class Server extends NanoHTTPD{
 				else if(params.get("action").equals("get_reco"))
 				{	
 					System.out.println(identity+identity.length());
-					CollaborativeFilter collaborativeFilter=new CollaborativeFilter(identity);
+					Long timestamp=System.currentTimeMillis();
+					CollaborativeFilter collaborativeFilter=new CollaborativeFilter(identity,timestamp);
 					@SuppressWarnings("all")
-					Map results=collaborativeFilter.getResults();
+					String results=collaborativeFilter.getResults();
 					if (results==null)
 					{
-						System.out.println("hi i am sleepy!");
 						return new Response(Response.Status.NO_CONTENT,MIME_PLAINTEXT,"TRY_LATER");
 					}
 					else
 					{
-						return new Response(Response.Status.OK,MIME_PLAINTEXT,results.toString());
+						return new Response(Response.Status.OK,MIME_PLAINTEXT,results);
 					}
 					
 				}

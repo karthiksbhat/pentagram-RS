@@ -6,12 +6,14 @@ def add_edges(def identity)
     	if(k==0)
     	{
     		g.addVertex([appname:line,genre:"none"]);
-    		g.v(userno).addEdge("uses",g.V.has("appname",line).next()).sideEffect{it.weight=1};
+    		g.v(userno).addEdge("uses",g.V.has("appname",line).next()).sideEffect{it.weight=1}.iterate();
     	}
     	else{
     		vno=g.V.has("appname",line).next().id;
-    		g.v(vno)_().filter{it.in("uses").has("identity",identity).count() == 0}.each{g.addEdge(g.v(userno), it, "uses")};
+    		g.v(vno)_().ifThenElse{it.in("uses").has("identity",identity).count()==0}{g.addEdge(g.v(userno), it, "uses").sideEffect{it.weight=1}.iterate()}{g.v(vno).inE("uses").outV.has("identity",identity).back(2).sideEffect{it.weight=it.weight+1}.iterate()}.iterate();
 		}	
 	}
 
 }
+
+
