@@ -1,0 +1,92 @@
+Project Title : A Recommendation System for users based on their daily computer applications' activities
+				(tracked by user logs from the system)
+
+Stages in the project :
+
+Stage 1 :
+-------- 
+Build a user level application. An application that can be installed on a user machine which then 
+corresponds with the central machine (recommender system server)
+Architecture of application : Client-Server based approach
+
+Technologies used :
+	1. Tkinter - Python based graphics library for GUI rendering
+	2. python-crontab - A python wrapping to create cron jobs and monitor crontab
+	3. cURL - A tool used to transfer data from or to a server using HTTP protocol
+
+
+Stage 2 :
+-------- 
+Decide on a common data representation for the logs from different users. Decide on a timeline and
+some threshold parameters to determine how much data is sent from each machine at a time, when, etc.
+The application developed in Stage 1 must comply with these decided parameters and the format of data.
+
+Technologies used :
+	1. ps(Unix Command) : A UNIX command(short for process status) which displays current running processes in the OS
+	2. CSV file format : Comma-seperated-values file format to represent the user logs
+
+Parameters used and threshold values decided :
+	1. Controlled variable time parameter : The user logs are merged and sent to server every 8 minutes
+	2. Number of recommended applications threshold
+	
+
+Stage 3 :
+-------- 
+Develop the recommender algorithm on the recommendation system server machine. This is the core of the 
+project where in all data is dynamically analysed based on time and other factors.
+Analysis results are prefarably represented as a graph(bi-partite) with edges and the nodes 
+representing the users or applications, etc. Edge weights can be used to track the time component.
+
+For more theoritical discussion on this phase : KSB Book, discussions with mentor
+
+Completed Work Progress:
+	Platform and Implementation modules:	
+		We have chosen Java as our primary backend coding language.
+		As for the GraphDatabase we are more liberal and have only chosen Neo4j for our prototype.
+		To keep the traversal and recommender logic independent from the GraphDatabase used,we have used "gremlin" 
+
+	A Neo4j server is running and to it is added an gremlin plugin.We will be querying the graph stored
+	from the Recommender system by curl/HTTP requests.
+
+Stage 4 :
+-------- 
+Small scale deployment and testing the results. This will of course involve some training of the 
+recommender system to develop some base data.
+
+
+
+Documentation for programs/code written so far :
+
+File : cron_job.py
+------------------
+
+Functionality : A Python script to create a crontab process(daemon process).This daemon process 
+				executes the Python script parser.py every 1 minute of the user machine.
+
+Executing : To create a daemon process to start logging - python cron_job.py start
+			To stop the logging and kill daemon process - python cron_job.py stop
+
+File : parser.py
+------------------
+
+Functionality : A Python script to capture the 'ps aux' output to get the list of running user processes.
+				1.Runs 'ps aux' and writes it to the capture file.
+				2.Reads version number from a VERSION file; this is used to create log files(Ex:log+VERSION.csv)
+				3.Every three times a new log+VERSION.csv file is created
+				4.Formats the 'ps aux' output to decided format; when version is 24 it stops the current cronjob and calls logmerger.py and pushes the data to the server	 
+
+Executing : Called by daemon process created by cron_job.py
+
+
+File : logmerger.py
+------------------
+
+Functionality : 1.Analyze the ulog files
+				2.Merge them into a single file (of predecided format)
+				3.Add this merged file to the send_folder
+				4.ping recommender server -- if +ve zip and send send_folder else 
+				5.Delete all ulog files
+				6.Rewrite version to 0 in VERSION
+				7.Restart cron_job
+
+Executing : Called by parser.py

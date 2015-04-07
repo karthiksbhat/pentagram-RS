@@ -1,8 +1,11 @@
 from crontab import CronTab
 import sys
+import os
 
 #task in cron
-cmd = 'python /home/nitin/Desktop/MINOR_PROJECT/LOG_PARSER/parser.py'
+
+pwd = os.path.abspath('.') 
+cmd = 'cd '+pwd+' ; python '+pwd+'/parser.py >> '+pwd+'/cron_log/crontab_log.txt'
 
 def start_logging():
 	tab = CronTab()
