@@ -1,0 +1,26 @@
+def constructgraph()
+{
+	g.addVertex([identity:"kkns1",gender:"male"]);
+    g.addVertex([identity:"kkns2",gender:"male"]);
+    g.addVertex([identity:"kkns3",gender:"male"]);
+    g.addVertex([identity:"kkns4",gender:"female"]);
+    g.addVertex([identity:"kkns5",gender:"male"]);
+    g.V.has('identity').sideEffect({it.weight=0});
+    g.addVertex([appname:"VLC",genre:"player"]);
+    g.addVertex([appname:"Eclipse",genre:"IDE"]);
+    g.addVertex([appname:"NetBeans",genre:"IDE"]);
+    g.addVertex([appname:"XChat",genre:"IRC"]);
+    g.addVertex([appname:"TPA",genre:"none"]);
+    g.V.has("identity","kkns1").next().addEdge("uses",g.V.has("appname","VLC").next());
+    g.V.has("identity","kkns1").next().addEdge("uses",g.V.has("appname","Eclipse").next());
+    g.V.has("identity","kkns2").next().addEdge("uses",g.V.has("appname","VLC").next());
+    g.V.has("identity","kkns2").next().addEdge("uses",g.V.has("appname","Eclipse").next());
+	g.V.has("identity","kkns2").next().addEdge("uses",g.V.has("appname","XChat").next());
+	g.V.has("identity","kkns3").next().addEdge("uses",g.V.has("appname","VLC").next());
+	g.V.has("identity","kkns3").next().addEdge("uses",g.V.has("appname","TPA").next());
+	g.V.has("identity","kkns3").next().addEdge("uses",g.V.has("appname","NetBeans").next());
+	g.V.has("identity","kkns4").next().addEdge("uses",g.V.has("appname","NetBeans").next());
+	g.V.has("identity","kkns4").next().addEdge("uses",g.V.has("appname","TPA").next());
+	g.V.has("identity","kkns5").next().addEdge("uses",g.V.has("appname","Eclipse").next());
+	g.E.sideEffect{it.weight=1};
+}

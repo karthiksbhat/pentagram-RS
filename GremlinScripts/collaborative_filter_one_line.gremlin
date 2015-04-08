@@ -1,0 +1,6 @@
+def getRecommendation(def identity)
+{
+	list_recommendation=[];
+	except_list=[];
+	g.V.has("identity",identity).as('x').out.aggregate(except_list).in.except('x').dedup().out.except(except_list).id.aggregate(list_recommendation);
+}

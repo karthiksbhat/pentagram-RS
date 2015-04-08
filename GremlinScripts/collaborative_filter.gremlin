@@ -1,21 +1,28 @@
 def getRecommendation(def identity)
 {
 	list=[];
-	g.V.has("identity",identity).as('x').out.in.except('x').id.aggregate(list);
-	list=list.unique{ a, b -> a <=> b };
+	original_apps=[];
+	
+	g.V.has("identity","sudeep").as('x').out.aggregate(original_apps).in.except('x').id.aggregate(list)
 	list_i=[];
 	list_j=[];
+	recommended_apps=[];
 	for(def i=0;i<list.size();i++)
 	{
-		list_i.clear();
-		g.v(list[i]).out.id.aggregate(list_i);
+		list_i=[];
+		g.v(list[i]).out.as('y').except(original_apps).id.aggregate(list_i).iterate();
 		for(def j=i+1;j<list.size();j++)
 		{	
-		    list_j.clear();
-			g.v(list[j]).out.id.aggregate(list_j);
-			println list_j;
-			println list_i;
+		    list_j=[];
+		    g.v(list[j]).out.as('y').except(original_apps).id.aggregate(list_j).iterate();
+		    for (def k : list_i.intersect(list_j))
+		    {
+		    	recommended_apps << k
+		    }
+
 		}
 	}
-	
+
+	recommended_apps = recommended_apps.unique{a,b -> a<=>b};
+
 }
