@@ -15,7 +15,7 @@ def register():
 	ipF.close()
 
 	parameters={"action":"register","identity":uname,"name":Name, "age":Age, "email":Email}
-	url="http://httpbin.org/get"#"http://10.42.0.88:6666"#IP Address of server
+	url="http://10.42.0.88:6666"#http://httpbin.org/get"#""#IP Address of server
 	r=requests.get(url, params={"action":"register","identity":uname,"name":Name, "age":Age, "email":Email})
 	if r.status_code == 200:
 		print r.text
@@ -79,21 +79,3 @@ if not os.path.isfile("identityFile.txt"):
 
 else:
 	generalCall()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
